@@ -14,7 +14,7 @@
 
 [![GitHub release](https://img.shields.io/github/release/Mercap/teams-api.svg)](https://github.com/jescalada/teams-api/releases/latest)
 [![Build Status](https://travis-ci.com/Mercap/teams-api.svg?branch=release-candidate)](https://travis-ci.com/Mercap/teams-api)
-[![Coverage Status](https://coveralls.io/repos/github/Mercap/teams-api/badge.svg?branch=release-candidate)](https://coveralls.io/github/jescalada/teams-api?branch=release-candidate)
+[![Coverage Status](https://coveralls.io/repos/github/Mercap/teams-api/badge.svg?branch=release-candidate)](https://coveralls.io/github/Mercap/teams-api?branch=release-candidate)
 
 Why would I care about this thing? When to use, for whom is designed, when not to use.
 
