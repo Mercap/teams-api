@@ -6,15 +6,15 @@
     <a href="docs/"><strong>Explore the docs »</strong></a>
     <br>
     <br>
-    <a href="https://github.com/jescalada/teams-api/issues/new?labels=Type%3A+Defect">Report a defect</a>
+    <a href="https://github.com/Mercap/teams-api/issues/new?labels=Type%3A+Defect">Report a defect</a>
     |
-    <a href="https://github.com/jescalada/teams-api/issues/new?labels=Type%3A+Feature">Request feature</a>
+    <a href="https://github.com/Mercap/teams-api/issues/new?labels=Type%3A+Feature">Request feature</a>
   </p>
 </p>
 
-[![GitHub release](https://img.shields.io/github/release/jescalada/teams-api.svg)](https://github.com/jescalada/teams-api/releases/latest)
-[![Build Status](https://travis-ci.com/jescalada/teams-api.svg?branch=release-candidate)](https://travis-ci.com/jescalada/teams-api)
-[![Coverage Status](https://coveralls.io/repos/github/jescalada/teams-api/badge.svg?branch=release-candidate)](https://coveralls.io/github/jescalada/teams-api?branch=release-candidate)
+[![GitHub release](https://img.shields.io/github/release/Mercap/teams-api.svg)](https://github.com/jescalada/teams-api/releases/latest)
+[![Build Status](https://travis-ci.com/Mercap/teams-api.svg?branch=release-candidate)](https://travis-ci.com/Mercap/teams-api)
+[![Coverage Status](https://coveralls.io/repos/github/Mercap/teams-api/badge.svg?branch=release-candidate)](https://coveralls.io/github/jescalada/teams-api?branch=release-candidate)
 
 Why would I care about this thing? When to use, for whom is designed, when not to use.
 
