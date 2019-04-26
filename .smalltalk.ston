@@ -1,7 +1,7 @@
 SmalltalkCISpec {
   #loading : [
     SCIMetacelloLoadSpec {
-      #baseline : 'teamsapi',
+      #baseline : 'TeamsApi',
       #directory : 'source',
       #load : [ 'CI' ],
       #platforms : [  #pharo ]
