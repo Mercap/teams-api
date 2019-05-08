@@ -2,29 +2,39 @@ Class {
 	#name : #Person,
 	#superclass : #Object,
 	#instVars : [
-		'identifier',
-		'name'
+		'name',
+		'lastName',
+		'emailAddress'
 	],
 	#category : #'TeamsAPI-Core'
 }
 
 { #category : #'instance creation' }
-Person class >> identifiedBy: anIdentifier named: aName [
-	^ self new initializeIdentifiedBy: anIdentifier named: aName
+Person class >> named: aName surnamed: aLastName withEmailAddress: anEmailAddress [
+	^ self new
+		initializeNamed: aName
+		surnamed: aLastName
+		withEmailAddress: anEmailAddress
 ]
 
 { #category : #accessing }
-Person >> identifier [
-	^ identifier
+Person >> emailAddress [
+	^ emailAddress
 ]
 
 { #category : #initialization }
-Person >> initializeIdentifiedBy: anIdentifier named: aName [
-	identifier := anIdentifier.
-	name := aName
+Person >> initializeNamed: aName surnamed: aLastName withEmailAddress: anEmailAddress [
+	name := aName.
+	lastName := aLastName.
+	emailAddress := anEmailAddress
 ]
 
-{ #category : #acccessing }
+{ #category : #accessing }
+Person >> lastName [
+	^ lastName
+]
+
+{ #category : #accessing }
 Person >> name [
 	^ name
 ]
