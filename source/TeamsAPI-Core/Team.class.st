@@ -10,7 +10,7 @@ Class {
 
 { #category : #'instance creatio' }
 Team class >> named: aName composedBy: aPersonsCollection [
-	self assertThereIsNoDuplicatedEmailOn: aPersonsCollection.
+
 	^ self new initializeNamed: aName composedBy: aPersonsCollection
 ]
 
