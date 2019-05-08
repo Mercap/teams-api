@@ -27,16 +27,3 @@ TeamTest >> testInstanceCreation [
 		assert: team name equals: teamName;
 		assert: team members equals: teamMembers
 ]
-
-{ #category : #tests }
-TeamTest >> testInstanceCreationFailWhenMemeberHadSameEmailAddress [
-	| teamMembers teamName team |
-	teamMembers := OrderedCollection
-		with: defaultPerson
-		with: defaultPerson.
-	teamName := 'Linces'.
-	self
-		should: [ Team named: teamName composedBy: teamMembers ]
-		raise: Exception
-		description: 'No es posible crear un equipo con miembros que posean el mismo email'
-]
