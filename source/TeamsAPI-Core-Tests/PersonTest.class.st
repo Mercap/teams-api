@@ -5,14 +5,18 @@ Class {
 }
 
 { #category : #tests }
-PersonTest >> testCreation [
+PersonTest >> testInstanceCreation [
 
-	|person personName|
+	|person personName personEmail  personLastName|
 	
 	personName:='La Raulito'.
-	person := Person identifiedBy: 10 named: personName.
+	personLastName := 'Perez'.
+	personEmail := 'laraulitoperez@gmail.com'.
+	person := Person named:personName surnamed:  personLastName withEmailAddress:personEmail  .
 	
-	self assert: person identifier equals: 10;
-	assert: person name equals: personName
+	self assert: person name equals: personName;
+	assert: person lastName equals: personLastName;
+	assert: person emailAddress equals: personEmail
+	
 	
 ]
