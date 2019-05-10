@@ -24,11 +24,6 @@ PersonSystem >> initialize [
 ]
 
 { #category : #accessing }
-PersonSystem >> name [
-	^ 'People Management System'
-]
-
-{ #category : #accessing }
 PersonSystem >> people [
 	^ people
 ]

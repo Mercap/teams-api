@@ -23,11 +23,6 @@ TeamSystem >> initialize [
 	teams := OrderedCollection new
 ]
 
-{ #category : #accessing }
-TeamSystem >> name [
-	^ 'Team Management'
-]
-
 { #category : #adding }
 TeamSystem >> startManagingTeam: aTeam [
 	AssertionChecker
