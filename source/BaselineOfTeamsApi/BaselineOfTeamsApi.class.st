@@ -20,7 +20,7 @@ BaselineOfTeamsApi >> baseline: spec [
 { #category : #accessing }
 BaselineOfTeamsApi >> baselineTeamsApi: spec [
 	spec
-		package: 'TeamsAPI-Core';
+		package: 'TeamsAPI-Core' with: [ spec requires: #('Kepler') ];
 		group: 'Deployment' with: 'TeamsAPI-Core';
 		package: 'TeamsAPI-Core-Tests'
 			with: [ spec requires: 'Deployment' ];
@@ -42,7 +42,9 @@ BaselineOfTeamsApi >> setUpDependencies: spec [
 			with: [ spec loads: 'Deployment' ];
 		project: 'Stargate-Tools'
 			copyFrom: 'Stargate'
-			with: [ spec loads: 'Tools' ];			
+			with: [ spec loads: 'Tools' ];
 		baseline: 'Kepler'
-			with: [ spec repository: 'github://ba-st/Kepler:v4/source' ]
+			with: [ spec
+				repository: 'github://ba-st/Kepler:v4/source';
+				loads: #('Deployment') ]
 ]
