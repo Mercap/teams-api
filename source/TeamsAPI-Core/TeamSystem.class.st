@@ -7,30 +7,9 @@ Class {
 	#category : #'TeamsAPI-Core'
 }
 
-{ #category : #adding }
-TeamSystem >> addTeam: aTeam [
-	self assertTeamNameIsNotInUse: aTeam name.
-	teams add: aTeam
-]
-
-{ #category : #adding }
-TeamSystem >> assertTeamNameIsNotInUse: aName [
-	teams
-		detect: [ :team | team name = aName ]
-		ifFound: [ Exception signal: 'El nombre de este equipo ya esta en uso' ]
-]
-
-{ #category : #adding }
-TeamSystem >> deleteTeam: aTeam [
-	teams
-		detect: [ :team | aTeam = team ]
-		ifNone: [ Exception signal: 'Este equipo no existe' ].
-	teams remove: aTeam
-]
-
 { #category : #installing }
 TeamSystem >> dependencies [
-	^ #(PersonSystemInterface TeamSystemInterface)
+	^ #()
 ]
 
 { #category : #initialization }
@@ -46,13 +25,28 @@ TeamSystem >> initialize [
 
 { #category : #accessing }
 TeamSystem >> name [
-
 	^ 'Team Management'
 ]
 
 { #category : #adding }
-TeamSystem >> teamNamed: aName [
+TeamSystem >> startManagingTeam: aTeam [
+	AssertionChecker
+		enforce: [ teams noneSatisfy: [ :team | team name = aTeam name ] ]
+		because:
+			('There''s already a team registered in our system with the name: <1s>.'
+				expandMacrosWith: aTeam name).
+	teams add: aTeam
+]
+
+{ #category : #adding }
+TeamSystem >> stopManagingTeam: aTeam [
+	AssertionChecker
+		enforce: [ teams anySatisfy: [ :team | aTeam = team ] ]
+		because: 'TStop managing team failed because it does not exist in the system.'.
+	teams remove: aTeam
+]
+
+{ #category : #accessing }
+TeamSystem >> teams [
 	^ teams
-		detect: [ :team | team name = aName ]
-		ifNone: [ Exception signal: 'No se encontro este equipo' ]
 ]

@@ -9,11 +9,22 @@ Class {
 	#category : #'TeamsAPI-Core'
 }
 
+{ #category : #'private-assertions' }
+Person class >> assertNotEmpty: aString forField: aFieldName [
+	AssertionChecker
+		enforce: [ aString notEmpty ]
+		because: ('A person''s <1s> can''t be empty.' expandMacrosWith: aFieldName)
+]
+
 { #category : #'instance creation' }
-Person class >> named: aName surnamed: aLastName withEmailAddress: anEmailAddress [
+Person class >> named: aName surnamed: aSurName withEmailAddress: anEmailAddress [
+	self
+		assertNotEmpty: aName forField: 'name';
+		assertNotEmpty: aSurName forField: 'surname';
+		assertNotEmpty: anEmailAddress forField: 'email adress'.
 	^ self new
 		initializeNamed: aName
-		surnamed: aLastName
+		surnamed: aSurName
 		withEmailAddress: anEmailAddress
 ]
 

@@ -18,23 +18,12 @@ TeamTest >> setUp [
 ]
 
 { #category : #tests }
-TeamTest >> testInstanceCreation [ 
+TeamTest >> testInstanceCreation [
 	| teamMembers teamName team |
-	teamMembers:=OrderedCollection with:(defaultPerson).
- 	teamName :='Linces'.
-	team := Team named:teamName composedBy: teamMembers.
-	
-self assert: team name equals: teamName;
-assert: team members equals: teamMembers 
-]
-
-{ #category : #tests }
-TeamTest >> testInstanceCreationFailWhenMemeberHadSameEmailAddress [
-	| teamMembers teamName team |
-	teamMembers:=OrderedCollection with:(defaultPerson).
- 	teamName :='Linces'.
-	team := Team named:teamName composedBy: teamMembers.
-	
-self assert: team name equals: teamName;
-assert: team members equals: teamMembers 
+	teamMembers := OrderedCollection with: defaultPerson.
+	teamName := 'Linces'.
+	team := Team named: teamName composedBy: teamMembers.
+	self
+		assert: team name equals: teamName;
+		assert: team members equals: teamMembers
 ]

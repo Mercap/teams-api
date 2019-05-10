@@ -26,8 +26,7 @@ PersonModule >> name [
 
 { #category : #'registering ' }
 PersonModule >> registerPersonManagementSystemForInstallationIn: systems [
-
-	^ self register: [ PersonSystem  new ] in: systems
+	^ self register: [ PersonSystem new ] in: systems
 ]
 
 { #category : #initialization }
@@ -35,7 +34,7 @@ PersonModule >> registerSystemInterface [
 	[ Kepler
 		registerInterfaceAt: #PersonSystemInterface
 		named: 'Person System Interface'
-		declaring: #(#addPerson: #deletePerson: #personWithEmailAddress:) ]
+		declaring: #(#startManagingPerson: #stopManagingPerson: #people) ]
 		on: ConflictingObjectFound
 		do: [ :signal | signal return ]
 ]
@@ -46,7 +45,6 @@ PersonModule >> rootSystem [
 ]
 
 { #category : #initialization }
-PersonModule >> systemInterfacesToInstall [ 
-	
+PersonModule >> systemInterfacesToInstall [
 	^ #(#PersonSystemInterface)
 ]

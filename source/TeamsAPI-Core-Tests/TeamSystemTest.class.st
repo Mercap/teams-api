@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'person',
 		'anotherPerson',
-		'composite'
+		'rootSystem'
 	],
 	#category : #'TeamsAPI-Core-Tests'
 }
@@ -23,11 +23,16 @@ TeamSystemTest >> setUp [
 		named: 'Rocio'
 		surnamed: 'Pasco'
 		withEmailAddress: 'r.pasco@gmail.com'.
-	composite := (TeamsAPISystemInstallation
-		installing:
-			{PersonModule.
-			TeamModule}) install: '1.0'.
-	composite startUp
+	rootSystem := TeamsAPISystemInstallation new install: '1.0'.
+	rootSystem startUp.
+	(rootSystem systemImplementing: #PersonSystemInterface)
+		startManagingPerson: person;
+		startManagingPerson: anotherPerson
+]
+
+{ #category : #tests }
+TeamSystemTest >> teamSystem [
+	^ rootSystem systemImplementing: #TeamSystemInterface
 ]
 
 { #category : #tests }
@@ -36,9 +41,11 @@ TeamSystemTest >> testAddTeam [
 	team := Team
 		named: 'Linces'
 		composedBy: (OrderedCollection with: person with: anotherPerson).
-	teamSystem := composite systemImplementing: #TeamSystemInterface.
-	teamSystem addTeam: team .
-	self assert: (teamSystem teamNamed: 'Linces') equals: team
+	teamSystem := self teamSystem.
+	teamSystem startManagingTeam: team.
+	self
+		assertCollection: teamSystem teams
+		hasSameElements: (Array with: team)
 ]
 
 { #category : #tests }
@@ -47,14 +54,20 @@ TeamSystemTest >> testDeleteATeamAlreadyDeleted [
 	team := Team
 		named: 'Linces'
 		composedBy: (OrderedCollection with: person with: anotherPerson).
-	teamSystem := composite systemImplementing: #TeamSystemInterface.
-	teamSystem addTeam: team.
-	self assert: (teamSystem teamNamed: 'Linces') equals: team.
-	teamSystem deleteTeam: team.
+	teamSystem := self teamSystem.
+	teamSystem startManagingTeam: team.
 	self
-		should: [ teamSystem deleteTeam: team]
-		raise: Exception
-		description: 'Este equipo no existe' 
+		assertCollection: teamSystem teams
+		hasSameElements: (Array with: team).
+	teamSystem stopManagingTeam: team.
+	self
+		assert: teamSystem teams isEmpty;
+		should: [ teamSystem stopManagingTeam: team ]
+			raise: AssertionFailed
+			withExceptionDo: [ :signal | 
+			self
+				assert: signal messageText
+				equals: 'TStop managing team failed because it does not exist in the system.' ]
 ]
 
 { #category : #tests }
@@ -63,14 +76,13 @@ TeamSystemTest >> testDeleteTeam [
 	team := Team
 		named: 'Linces'
 		composedBy: (OrderedCollection with: person with: anotherPerson).
-	teamSystem := composite systemImplementing: #TeamSystemInterface.
-	teamSystem addTeam: team.
-	self assert: (teamSystem teamNamed: 'Linces') equals: team.
-	teamSystem deleteTeam: team.
+	teamSystem := self teamSystem.
+	teamSystem startManagingTeam: team.
 	self
-		should: [ teamSystem teamNamed: 'Linces' ]
-		raise: Exception
-		description: 'No se encontro este equipo' 
+		assertCollection: teamSystem teams
+		hasSameElements: (Array with: team).
+	teamSystem stopManagingTeam: team.
+	self assert: teamSystem teams isEmpty
 ]
 
 { #category : #tests }
@@ -82,11 +94,21 @@ TeamSystemTest >> testFailToAddTeamWithNamedAlreadyUsed [
 	teamWithSameName := Team
 		named: 'Linces'
 		composedBy: (OrderedCollection with: anotherPerson).
-	teamSystem := composite systemImplementing: #TeamSystemInterface.
-	teamSystem addTeam: team.
+	teamSystem := self teamSystem.
+	teamSystem startManagingTeam: team.
 	self
-		assert: (teamSystem teamNamed: 'Linces') equals: team;
-		should: [ teamSystem addTeam: teamWithSameName ]
+		should: [ teamSystem startManagingTeam: teamWithSameName ]
 			raise: Exception
-			description: 'El nombre de este equipo ya esta en uso'
+			withExceptionDo: [ :signal | 
+			self
+				assert: signal messageText
+				equals:
+					'There''s already a team registered in our system with the name: Linces.' ];
+		assertCollection: teamSystem teams
+			hasSameElements: (Array with: team)
+]
+
+{ #category : #tests }
+TeamSystemTest >> testGetTeamsOnEmptySystem [
+	self assert: self teamSystem teams isEmpty
 ]

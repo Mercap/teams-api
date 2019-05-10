@@ -29,14 +29,13 @@ TeamModule >> registerSystemInterface [
 	[ Kepler
 		registerInterfaceAt: #TeamSystemInterface
 		named: 'Team System Interface'
-		declaring: #(#addTeam: #deleteTeam: #teamNamed:) ]
+		declaring: #(#startManagingTeam: #stopManagingTeam: #teams) ]
 		on: ConflictingObjectFound
 		do: [ :signal | signal return ]
 ]
 
 { #category : #private }
 TeamModule >> registerTeamManagementSystemForInstallationIn: systems [
-
 	^ self register: [ TeamSystem new ] in: systems
 ]
 
@@ -47,6 +46,5 @@ TeamModule >> rootSystem [
 
 { #category : #private }
 TeamModule >> systemInterfacesToInstall [
-
-	^#(#TeamSystemInterface)
+	^ #(#TeamSystemInterface)
 ]

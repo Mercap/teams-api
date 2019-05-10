@@ -19,15 +19,12 @@ TeamsAPISystemInstallation >> beAwareOfShutDownOf: aCompositeSystem [
 
 ]
 
-{ #category : #initialization }
-TeamsAPISystemInstallation >> initializeInstalling: aModuleCollection [
-
-	modules := aModuleCollection 
-]
-
 { #category : #accessing }
 TeamsAPISystemInstallation >> modulesToInstall [
-	^ modules
+	^ OrderedCollection new
+		add: PersonModule;
+		add: TeamModule;
+		yourself
 ]
 
 { #category : #accessing }
