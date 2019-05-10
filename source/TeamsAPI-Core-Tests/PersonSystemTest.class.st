@@ -26,8 +26,11 @@ PersonSystemTest >> personSystem [
 { #category : #initializing }
 PersonSystemTest >> setUp [
 	super setUp.
-	rootSystem := TeamsAPISystemInstallation new install: '1.0'.
-	rootSystem startUp
+	rootSystem := CompositeSystem new.
+	rootSystem
+		register: PersonSystem new;
+		register: TeamSystem new;
+		startUp
 ]
 
 { #category : #tests }

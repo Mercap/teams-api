@@ -23,11 +23,11 @@ TeamSystemTest >> setUp [
 		named: 'Rocio'
 		surnamed: 'Pasco'
 		withEmailAddress: 'r.pasco@gmail.com'.
-	rootSystem := TeamsAPISystemInstallation new install: '1.0'.
-	rootSystem startUp.
-	(rootSystem systemImplementing: #PersonSystemInterface)
-		startManagingPerson: person;
-		startManagingPerson: anotherPerson
+	rootSystem := CompositeSystem new.
+	rootSystem
+		register: PersonSystem new;
+		register: TeamSystem new;
+		startUp
 ]
 
 { #category : #tests }
