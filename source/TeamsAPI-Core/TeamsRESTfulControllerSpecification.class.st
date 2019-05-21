@@ -1,5 +1,5 @@
 Class {
 	#name : #TeamsRESTfulControllerSpecification,
 	#superclass : #ResourceRESTfulControllerSpecification,
-	#category : #'TeamsAPI-Core'
+	#category : #'TeamsAPI-Core-Controllers'
 }

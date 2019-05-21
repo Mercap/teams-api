@@ -4,14 +4,16 @@ Class {
 	#instVars : [
 		'people'
 	],
-	#category : #'TeamsAPI-Core'
+	#category : #'TeamsAPI-Core-Controllers'
 }
 
 { #category : #'private - support' }
 PeopleRESTfulController >> createPersonBasedOn: anHttpRequest within: aContext [
+
 	^ self
 		withCreatedResourceDo: [ :resource | 
 			| newPerson |
+
 			newPerson := Person
 				named: resource name
 				surnamed: resource lastName

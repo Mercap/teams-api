@@ -1,7 +1,7 @@
 Class {
 	#name : #TeamsRESTfulController,
 	#superclass : #ResourceRESTfulController,
-	#category : #'TeamsAPI-Core'
+	#category : #'TeamsAPI-Core-Controllers'
 }
 
 { #category : #initialization }

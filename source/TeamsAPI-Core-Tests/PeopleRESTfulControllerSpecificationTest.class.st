@@ -1,10 +1,10 @@
 Class {
 	#name : #PeopleRESTfulControllerSpecificationTest,
 	#superclass : #TestCase,
-	#category : #'TeamsAPI-Core-Tests'
+	#category : #'TeamsAPI-Core-Tests-Controllers'
 }
 
-{ #category : #'*TeamsAPI-Core-Tests' }
+{ #category : #'as yet unclassified' }
 PeopleRESTfulControllerSpecificationTest >> testTemplate [
 
 	| spec |
