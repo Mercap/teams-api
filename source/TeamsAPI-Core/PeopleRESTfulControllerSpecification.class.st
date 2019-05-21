@@ -28,8 +28,18 @@ PeopleRESTfulControllerSpecification >> identifierKey [
 	^#identifier
 ]
 
-{ #category : #acccessing }
+{ #category : #accessing }
 PeopleRESTfulControllerSpecification >> listTemplate [
 	
 	^self endpoint
+]
+
+{ #category : #accessing }
+PeopleRESTfulControllerSpecification >> personMappingKey [
+	^ #person
+]
+
+{ #category : #accessing }
+PeopleRESTfulControllerSpecification >> personVersion1dot0dot0MediaType [
+	^ 'application/vnd.stargate.person+json;version=1.0.0' asMediaType
 ]
