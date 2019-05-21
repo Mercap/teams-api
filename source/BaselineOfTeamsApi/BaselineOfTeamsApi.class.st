@@ -19,8 +19,11 @@ BaselineOfTeamsApi >> baseline: spec [
 
 { #category : #accessing }
 BaselineOfTeamsApi >> baselineTeamsApi: spec [
+
 	spec
-		package: 'TeamsAPI-Core' with: [ spec requires: #('Kepler') ];
+		package: 'TeamsModel';
+		package: 'TeamsAPI-Core'
+			with: [ spec requires: #('TeamsModel' 'Kepler') ];
 		group: 'Deployment' with: 'TeamsAPI-Core';
 		package: 'TeamsAPI-Core-Tests'
 			with: [ spec requires: 'Deployment' ];
