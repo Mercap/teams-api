@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'name',
 		'lastName',
-		'emailAddress'
+		'emailAddress',
+		'uuid'
 	],
 	#category : #'TeamsAPI-Core-Model'
 }
@@ -48,4 +49,16 @@ Person >> lastName [
 { #category : #accessing }
 Person >> name [
 	^ name
+]
+
+{ #category : #Accessing }
+Person >> uuid [
+
+	^ uuid
+]
+
+{ #category : #Accessing }
+Person >> uuid: anInteger [
+
+	uuid := anInteger
 ]

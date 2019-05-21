@@ -1,13 +1,16 @@
 Class {
 	#name : #PeopleRESTfulControllerTest,
 	#superclass : #ResourceRESTfulControllerTest,
+	#instVars : [
+		'peopleManagementSystem'
+	],
 	#category : #'TeamsAPI-Core-Tests-Controllers'
 }
 
 { #category : #test }
 PeopleRESTfulControllerTest >> baseUrl [
 
-	^ 'https://localhost' asZnUrl
+	^ 'http://people.mercap.net' asZnUrl
 ]
 
 { #category : #'block support' }
@@ -16,15 +19,65 @@ PeopleRESTfulControllerTest >> defaultPersonMediaType [
 ]
 
 { #category : #'block support' }
+PeopleRESTfulControllerTest >> registerPerson: aPerson [
+
+	peopleManagementSystem startManagingPerson: aPerson
+]
+
+{ #category : #'block support' }
 PeopleRESTfulControllerTest >> requestToCreatePersonFrom: json [
 
 	^ self requestToPOST: json as: self defaultPersonMediaType
 ]
 
+{ #category : #'block support' }
+PeopleRESTfulControllerTest >> requestToGet: aUrl accepting: anAcceptHeader [
+
+	^ TeaRequest
+		fromZnRequest:
+			((ZnRequest get: aUrl)
+				setAccept: anAcceptHeader;
+				yourself)
+]
+
+{ #category : #'block support' }
+PeopleRESTfulControllerTest >> requestToGetPeopleAccepting: anAcceptHeader [
+
+	^ self requestToGet: self resourceUrl accepting: anAcceptHeader
+]
+
+{ #category : #test }
+PeopleRESTfulControllerTest >> setUp [
+
+	peopleManagementSystem := PeopleManagementSystem new.
+	super setUp
+]
+
 { #category : #test }
 PeopleRESTfulControllerTest >> setUpResourceController [
 
-	resourceController := PeopleRESTfulController new
+	resourceController := PeopleRESTfulController
+		for: peopleManagementSystem
+]
+
+{ #category : #tests }
+PeopleRESTfulControllerTest >> testGetWhenNoPeopleRegistered [
+
+	| response |
+
+	response := resourceController
+		getPeopleBasedOn: (self requestToGetPeopleAccepting: '*/*')
+		within: self newHttpRequestContext.
+
+	self
+		assert: response isSuccess;
+		assert: response status equals: 200;
+		assert: response contentType asMediaType
+			equals: resourceController specification personVersion1dot0dot0MediaType.
+
+	self
+		withJsonFromContentsIn: response
+		do: [ :people | self assert: people isEmpty ]
 ]
 
 { #category : #tests }
@@ -36,18 +89,20 @@ PeopleRESTfulControllerTest >> testPersonCreation [
 		createPersonBasedOn:
 			(self
 				requestToCreatePersonFrom:
-					(NeoJSONObject new
-						at: #name put: 'Roberto';
-						at: #lastName put: 'Rodriguez';
-						at: #email put: 'r.rodriguez@gmail.com';
-						yourself))
+					'{"name":"Roberto","lastName":"Rodriguez","email":"r.rodriguez@gmail.com"}')
 		within: self newHttpRequestContext.
 	self
 		assert: response isSuccess;
 		assert: response status equals: 201;
 		assertUrl: response location
-			equals: 'http://people.example.com/people/1';
+			equals: 'http://people.mercap.net/people/1';
 		assert: response hasEntity;
-		assert: resourceController people size equals: 1;
-		assert: resourceController people first name equals: 'Roberto'
+		assert: peopleManagementSystem people size equals: 1;
+		assert: peopleManagementSystem people first name equals: 'Roberto'
+]
+
+{ #category : #test }
+PeopleRESTfulControllerTest >> urlOf: aPerson [
+
+	^ (self resourceUrl / aPerson uuid asString) asString
 ]

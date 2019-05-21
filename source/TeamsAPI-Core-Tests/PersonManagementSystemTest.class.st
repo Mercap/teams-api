@@ -2,7 +2,7 @@
 A PersonSystemTest is a test class for testing the behavior of PersonSystem
 "
 Class {
-	#name : #PersonSystemTest,
+	#name : #PersonManagementSystemTest,
 	#superclass : #TestCase,
 	#instVars : [
 		'rootSystem'
@@ -11,7 +11,7 @@ Class {
 }
 
 { #category : #acccessing }
-PersonSystemTest >> lucasRojas [
+PersonManagementSystemTest >> lucasRojas [
 	^ Person
 		named: 'Lucas'
 		surnamed: 'Rojas'
@@ -19,22 +19,22 @@ PersonSystemTest >> lucasRojas [
 ]
 
 { #category : #acccessing }
-PersonSystemTest >> personSystem [
+PersonManagementSystemTest >> personSystem [
 	^ rootSystem systemImplementing: #PersonSystemInterface
 ]
 
 { #category : #initializing }
-PersonSystemTest >> setUp [
+PersonManagementSystemTest >> setUp [
 	super setUp.
 	rootSystem := CompositeSystem new.
 	rootSystem
-		register: PersonSystem new;
-		register: TeamSystem new;
+		register: PeopleManagementSystem new;
+		register: TeamManagementSystem new;
 		startUp
 ]
 
 { #category : #tests }
-PersonSystemTest >> testAddPerson [
+PersonManagementSystemTest >> testAddPerson [
 	| person personSystem |
 	person := self lucasRojas.
 	personSystem := self personSystem.
@@ -45,7 +45,7 @@ PersonSystemTest >> testAddPerson [
 ]
 
 { #category : #tests }
-PersonSystemTest >> testDeletePerson [
+PersonManagementSystemTest >> testDeletePerson [
 	| person personSystem |
 	person := self lucasRojas.
 	personSystem := self personSystem.
@@ -58,7 +58,7 @@ PersonSystemTest >> testDeletePerson [
 ]
 
 { #category : #tests }
-PersonSystemTest >> testFailToDeletePersonAlreadyDeleted [
+PersonManagementSystemTest >> testFailToDeletePersonAlreadyDeleted [
 	| person personSystem |
 	person := self lucasRojas.
 	personSystem := self personSystem.
@@ -79,7 +79,7 @@ PersonSystemTest >> testFailToDeletePersonAlreadyDeleted [
 ]
 
 { #category : #tests }
-PersonSystemTest >> testFailWhenAddingAPersonWithSameEmailAddress [
+PersonManagementSystemTest >> testFailWhenAddingAPersonWithSameEmailAddress [
 	| person personSystem personWithSameEmail |
 	person := self lucasRojas.
 	personWithSameEmail := Person
@@ -101,6 +101,6 @@ PersonSystemTest >> testFailWhenAddingAPersonWithSameEmailAddress [
 ]
 
 { #category : #tests }
-PersonSystemTest >> testGetPeopleOnEmptySystem [
+PersonManagementSystemTest >> testGetPeopleOnEmptySystem [
 	self assert: self personSystem people isEmpty
 ]
