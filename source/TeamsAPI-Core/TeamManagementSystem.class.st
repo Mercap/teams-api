@@ -1,30 +1,36 @@
 Class {
-	#name : #TeamSystem,
+	#name : #TeamManagementSystem,
 	#superclass : #SubsystemImplementation,
 	#instVars : [
 		'teams'
 	],
-	#category : #'TeamsAPI-Core'
+	#category : #'TeamsAPI-Core-Systems'
 }
 
 { #category : #installing }
-TeamSystem >> dependencies [
+TeamManagementSystem >> dependencies [
 	^ #()
 ]
 
 { #category : #initialization }
-TeamSystem >> implementedInterfaces [
+TeamManagementSystem >> implementedInterfaces [
 	^ #(#TeamSystemInterface)
 ]
 
 { #category : #initialization }
-TeamSystem >> initialize [
+TeamManagementSystem >> initialize [
 	super initialize.
 	teams := OrderedCollection new
 ]
 
+{ #category : #accessing }
+TeamManagementSystem >> name [
+
+	^ 'Teams Management System'
+]
+
 { #category : #adding }
-TeamSystem >> startManagingTeam: aTeam [
+TeamManagementSystem >> startManagingTeam: aTeam [
 	AssertionChecker
 		enforce: [ teams noneSatisfy: [ :team | team name = aTeam name ] ]
 		because:
@@ -34,7 +40,7 @@ TeamSystem >> startManagingTeam: aTeam [
 ]
 
 { #category : #adding }
-TeamSystem >> stopManagingTeam: aTeam [
+TeamManagementSystem >> stopManagingTeam: aTeam [
 	AssertionChecker
 		enforce: [ teams anySatisfy: [ :team | aTeam = team ] ]
 		because: 'TStop managing team failed because it does not exist in the system.'.
@@ -42,6 +48,6 @@ TeamSystem >> stopManagingTeam: aTeam [
 ]
 
 { #category : #accessing }
-TeamSystem >> teams [
+TeamManagementSystem >> teams [
 	^ teams
 ]

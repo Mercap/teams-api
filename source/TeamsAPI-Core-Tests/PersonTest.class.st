@@ -1,7 +1,7 @@
 Class {
 	#name : #PersonTest,
 	#superclass : #TestCase,
-	#category : #'TeamsAPI-Core-Tests'
+	#category : #'TeamsAPI-Core-Tests-Model'
 }
 
 { #category : #tests }

@@ -2,18 +2,18 @@
 A TeamSystemTest is a test class for testing the behavior of TeamSystem
 "
 Class {
-	#name : #TeamSystemTest,
+	#name : #TeamManagementSystemTest,
 	#superclass : #TestCase,
 	#instVars : [
 		'person',
 		'anotherPerson',
 		'rootSystem'
 	],
-	#category : #'TeamsAPI-Core-Tests'
+	#category : #'TeamsAPI-Core-Tests-Systems'
 }
 
 { #category : #running }
-TeamSystemTest >> setUp [
+TeamManagementSystemTest >> setUp [
 	super setUp.
 	person := Person
 		named: 'Lucas'
@@ -25,18 +25,18 @@ TeamSystemTest >> setUp [
 		withEmailAddress: 'r.pasco@gmail.com'.
 	rootSystem := CompositeSystem new.
 	rootSystem
-		register: PersonSystem new;
-		register: TeamSystem new;
+		register: PeopleManagementSystem new;
+		register: TeamManagementSystem new;
 		startUp
 ]
 
 { #category : #tests }
-TeamSystemTest >> teamSystem [
+TeamManagementSystemTest >> teamSystem [
 	^ rootSystem systemImplementing: #TeamSystemInterface
 ]
 
 { #category : #tests }
-TeamSystemTest >> testAddTeam [
+TeamManagementSystemTest >> testAddTeam [
 	| team teamSystem |
 	team := Team
 		named: 'Linces'
@@ -49,7 +49,7 @@ TeamSystemTest >> testAddTeam [
 ]
 
 { #category : #tests }
-TeamSystemTest >> testDeleteATeamAlreadyDeleted [
+TeamManagementSystemTest >> testDeleteATeamAlreadyDeleted [
 	| team teamSystem |
 	team := Team
 		named: 'Linces'
@@ -71,7 +71,7 @@ TeamSystemTest >> testDeleteATeamAlreadyDeleted [
 ]
 
 { #category : #tests }
-TeamSystemTest >> testDeleteTeam [
+TeamManagementSystemTest >> testDeleteTeam [
 	| team teamSystem |
 	team := Team
 		named: 'Linces'
@@ -86,7 +86,7 @@ TeamSystemTest >> testDeleteTeam [
 ]
 
 { #category : #tests }
-TeamSystemTest >> testFailToAddTeamWithNamedAlreadyUsed [
+TeamManagementSystemTest >> testFailToAddTeamWithNamedAlreadyUsed [
 	| team teamWithSameName teamSystem |
 	team := Team
 		named: 'Linces'
@@ -109,6 +109,6 @@ TeamSystemTest >> testFailToAddTeamWithNamedAlreadyUsed [
 ]
 
 { #category : #tests }
-TeamSystemTest >> testGetTeamsOnEmptySystem [
+TeamManagementSystemTest >> testGetTeamsOnEmptySystem [
 	self assert: self teamSystem teams isEmpty
 ]

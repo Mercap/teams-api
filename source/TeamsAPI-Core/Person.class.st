@@ -4,9 +4,10 @@ Class {
 	#instVars : [
 		'name',
 		'lastName',
-		'emailAddress'
+		'emailAddress',
+		'uuid'
 	],
-	#category : #'TeamsAPI-Core'
+	#category : #'TeamsAPI-Core-Model'
 }
 
 { #category : #'private-assertions' }
@@ -48,4 +49,16 @@ Person >> lastName [
 { #category : #accessing }
 Person >> name [
 	^ name
+]
+
+{ #category : #Accessing }
+Person >> uuid [
+
+	^ uuid
+]
+
+{ #category : #Accessing }
+Person >> uuid: anInteger [
+
+	uuid := anInteger
 ]

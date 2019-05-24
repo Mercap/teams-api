@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'defaultPerson'
 	],
-	#category : #'TeamsAPI-Core-Tests'
+	#category : #'TeamsAPI-Core-Tests-Model'
 }
 
 { #category : #initialization }

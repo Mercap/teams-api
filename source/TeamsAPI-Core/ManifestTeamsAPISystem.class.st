@@ -1,7 +1,7 @@
 Class {
 	#name : #ManifestTeamsAPISystem,
 	#superclass : #PackageManifest,
-	#category : #'TeamsAPI-Core'
+	#category : #'TeamsAPI-Core-Systems'
 }
 
 { #category : #'class initialization' }

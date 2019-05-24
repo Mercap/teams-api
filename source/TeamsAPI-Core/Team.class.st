@@ -5,7 +5,7 @@ Class {
 		'name',
 		'members'
 	],
-	#category : #'TeamsAPI-Core'
+	#category : #'TeamsAPI-Core-Model'
 }
 
 { #category : #'instance creatio' }
